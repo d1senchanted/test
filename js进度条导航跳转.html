@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+*{margin:0;padding:0;} 
+.base{position:fixed;height:24px;margin:0 15%;width:70%} 
+#baseline{width:800px;height:6px;background:#ddd;margin:6px auto;position:relative} 
+#baseline a{display:block;width:10px;height:10px;border:4px solid #ddd;background:white;border-radius:50%;position:absolute;margin-top:-6px;} 
+.content{height:3200px;background:linear-gradient(to bottom,transparent,#ADD5D6)} p{padding:220px 0px;}
+#baseline a:nth-of-type(1){left:-2px;border:4px solid #0ef} #baseline a:nth-of-type(2){left:20%;} #baseline a:nth-of-type(3){left:40%;} #baseline a:nth-of-type(4){right:40%;} #baseline a:nth-of-type(5){right:20%;} #baseline a:nth-of-type(6){right:-2px;}
+</style>
+</head>
+
+<body>
+<div class="base">
+  <div id="baseline">
+    <a href="javascript:;" onclick="goto(0)"></a>
+    <a href="javascript:;" onclick="goto(1)"></a>
+    <a href="javascript:;" onclick="goto(2)"></a>
+    <a href="javascript:;" onclick="goto(3)"></a>
+    <a href="javascript:;" onclick="goto(4)"></a>
+    <a href="javascript:;" onclick="goto(5)"></a>
+  </div>
+</div>
+<div class="content">
+  <p>我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字<br />我是一段文字我是一段文字我是一段文字我是一段文字</p>
+  <p>我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字<br />我是一段文字我是一段文字我是一段文字我是一段文字</p>
+  <p>我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字<br />我是一段文字我是一段文字我是一段文字我是一段文字</p>
+  <p>我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字<br />我是一段文字我是一段文字我是一段文字我是一段文字</p>
+  <p>我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字<br />我是一段文字我是一段文字我是一段文字我是一段文字</p>
+  <p>我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字我是一段文字<br />我是一段文字我是一段文字我是一段文字我是一段文字</p>
+</div>
+</body>
+<script type="text/javascript">
+window.onscroll = function(){
+  var h = document.documentElement.scrollTop || document.body.scrollTop;console.log(h);
+  var cir = document.getElementById("baseline").getElementsByTagName("a");//console.log(cir);
+  var cnum = parseInt((h-200)/400);
+  console.log(cnum); 
+  for (i=0;i<cir.length;i++){
+	cir[i].style.border = "4px solid #ddd";
+	cir[cnum].style.border = "4px solid #0ef";	
+  }
+}
+function goto(x){
+	var cdistance = 0;
+	if (x==0){
+		cdistance = 0;
+		}
+	else {
+		cdistance = x*400+200;
+		}
+	var h = document.documentElement.scrollTop || document.body.scrollTop;
+	var speed = (cdistance - h)/2;
+	var timer = setInterval(function(){		
+		var _h = document.documentElement.scrollTop || document.body.scrollTop;
+		document.documentElement.scrollTop = document.body.scrollTop += speed;
+		speed = speed*3/5;
+		if (Math.abs(_h-cdistance)<100){
+			window.scrollTo(0,cdistance);
+			}
+		if (_h == cdistance){
+			clearInterval(timer);
+			}
+		},150)
+	}
+</script>
+</html>
